@@ -1,0 +1,28 @@
+{% load static %}
+<html>
+    <head>
+        <title>
+            Sticky Notes
+        </title>
+        <link rel="stylesheet" href="{% static 'styles/style.css' %}?{% now 'U' %}">
+        <link href="https://fonts.googleapis.com/css?family=Zen Dots" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    </head>
+<body>
+    <div class="login-container">
+        <div class="h">Sign Up</div>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="entry"><label class="text">Username</label>
+            <input type="text" name="username" placeholder="Enter username"/><br></div>
+            <div class="entry"> <label class="text">Password</label><br>
+            <input type="password" name="password" placeholder="Enter password"/><br></div>
+            <div class="entry"><label class="text">New Project?</label><br>
+            <input type="text" name="addproject" placeholder="True or False"/><br></div>
+            <div class="entry"><label class="text">Project name</label><br>
+            <input type="text" name="projectname" placeholder="Enter projectname"/><br></div>
+            <input type="submit" value="Sign Up" class="log login"/>
+        </form>
+    </div>
+</body>
+</html>

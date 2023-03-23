@@ -1,0 +1,38 @@
+{% load static %}
+<html>
+    <head>
+        <title>
+            Sticky Notes
+        </title>
+        <link rel="stylesheet" href="{% static 'styles/style.css' %}?{% now 'U' %}">
+        <link href="https://fonts.googleapis.com/css?family=Zen Dots" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    </head>
+<body>
+    <div class="container">
+        <div class="card schedule"><div class="h">Create Schedule</div>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="entry"><label class="text">Title</label>
+            <input type="text" name="title" placeholder="Enter Title"/><br></div>
+            <div class="entry"> <label class="text">Deadline</label><br>
+            <input type="date" name="date" placeholder="Enter deadline"/><br></div>
+            <div class="entry"><label class="text">Add new?</label><br>
+            <input type="text" name="addschedule" placeholder="True or False"/><br></div>
+            <input type="submit" value="Add/Sign Up" class="log login"/>
+        </form>
+    </div>
+
+    <div class="card schedule">
+        <div class="h">Schedule</div>
+        {% for schedule in schedule %}
+            <div class="rowwise">
+                <div class="point"></div>
+                <div class="sh">{{schedule.title}}</div>
+                <div class="time">{{schedule.date}}</div>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+</body>
+</html>

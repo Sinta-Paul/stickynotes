@@ -1,0 +1,113 @@
+{% load static %}
+<html>
+    <head>
+        <title>
+            Sticky Notes
+        </title>
+        <link rel="stylesheet" href="{% static 'styles/style.css' %}?{% now 'U' %}">
+        <link href="https://fonts.googleapis.com/css?family=Zen Dots" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    </head>
+    <body>
+        <div class="mainbody">
+        <div class="navbar">
+            <ul>
+            <li class="name">Sticky Notes</li>
+            <li><a href="" class="signup">{{projectname}}</a></li>
+            <li><a href="{% url 'logout' %}" class="login">Logout</a></li>
+            </ul>
+        </div>
+        <div class="dash-container">
+            <div class="split">
+
+                <div class="grpmembers">
+                Group members
+                {% for member in members %}
+                <div class="member">
+                    {{member}}
+                </div>
+                {% endfor %}
+                </div>
+
+                <div class="card schedules">
+                    <div class="h">Schedule</div>
+                    {% for schedule in schedule %}
+                    <div class="rowwise">
+                        <div class="point"></div>
+                        <div class="sh">{{schedule.title}}</div>
+                        <div class="time">{{schedule.date}}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="middle">
+
+                <div class="progress">
+                    <div class="row2"><div class="h">Progress</div>
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <input type="text" name="commit" class="textfield" placeholder="Add Progress"/>
+                        <input type="submit" value="Add" name="progress" class="login"/></div>
+                    </form>
+                    <hr>
+                    {% for progress in progress %}
+                    <div class="commit">
+                        <div class="sh">{{progress.commit}}</div>
+                        <div class="time">Updated  by {{progress.user}} {{progress.created|timesince}} mins ago</div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="card resources">
+                    <div class="row2"><div class="h">Resources</div>
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <input type="text" name="link" class="textfield" placeholder="Enter resource link"/>
+                        <input type="submit" value="Add" name="resource" class="login"/>
+                    </form>
+                    </div>
+                    <div class="hi">
+                    {% for link in links %}
+                    <div class="row2wise">
+                    <div class="commit">
+                    <a href="{{link.link}}" class="links">{{link.link}}</a>
+                    </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                </div>
+
+            </div>
+
+            <div class="middle">
+
+                <div class="card todo">
+                    <div class="row3"><div class="h">Tasks</div>
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <input type="text" name="tasks" class="textfield" placeholder="Enter task"/>
+                        <input type="submit" value="Add" name="task" class="login"/></form></div>
+                    
+                    {% for task in tasks %}
+                    <div class="rowwise">
+                        <div class="point"></div>
+                        <div class="sh">{{task.tasks}}</div>
+                        <a href="{% url 'markasdone' user projectname task.id %}" class="mark">Mark as done</a>
+                    </div>  
+                    {% endfor %}  
+                </div>
+
+                <div class="card alert">
+                    <div class="h">Alerts</div>
+                    {% for alert in alerts %}
+                    <div class="alertmsg">
+                        {{alert.title}} is due on {{alert.date}}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

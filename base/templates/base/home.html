@@ -1,0 +1,28 @@
+{% load static %}
+<html>
+    <head>
+        <title>
+            Sticky Notes
+        </title>
+        <link href="{% static 'styles/style.css' %}" rel="stylesheet" >
+        <link href="https://fonts.googleapis.com/css?family=Zen Dots" rel="stylesheet">
+    </head>
+    <body>
+        <div class="navbar">
+            <ul>
+            <li class="name">Sticky Notes</li>
+            <li><a href="{% url 'signup' %}" class="signup">Sign Up</a></li>
+            <li><a href="{% url 'login' %}" class="login">Login</a></li>
+            </ul>
+        </div>
+        <div class="main-container">
+            <div class="heading">Manage your group efficiently with</div>
+            <div class="notes">
+                <div class="violet">Schedules</div>
+                <div class="orange">Reminders</div>
+                <div class="violet">Progress Analysis</div>
+                <div class="orange">Resource sharing</div>
+            </div>
+        </div>
+    </body>
+</html>
